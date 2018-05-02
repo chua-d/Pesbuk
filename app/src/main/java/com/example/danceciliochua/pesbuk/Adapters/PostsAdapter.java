@@ -20,18 +20,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     private ArrayList<Posts> mPosts;
     private Context mContext;
-    private String mName;
 
     /**
      * Constructor that passes in the sports data and the context
      * @param Posts ArrayList containing the sports data
      * @param context Context of the application
      */
-    public PostsAdapter(Context context, ArrayList<Posts> Posts, String name) {
+    public PostsAdapter(Context context, ArrayList<Posts> Posts) {
         mPosts = new ArrayList<>();
         this.mPosts = Posts;
         this.mContext = context;
-        this.mName = name;
     }
 
     @Override
@@ -43,7 +41,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     @Override
     public PostsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.list_people, parent, false));
+        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.list_posts, parent, false));
     }
 
     @Override
@@ -51,7 +49,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         return mPosts.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         //Member Variables for the TextViews
         private TextView mPostName;
@@ -72,6 +70,15 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             mPostTitle = (TextView)itemView.findViewById(R.id.post_title);
             mPostBody = (TextView)itemView.findViewById(R.id.post_body);
             mCommentButton = (TextView)itemView.findViewById(R.id.post_comments_button);
+
+
+        }
+
+        void bindTo(Posts currentPost){
+            //Populate the textviews with data
+            mPostTitle.setText(currentPost.getTitle());
+            mPostBody.setText(currentPost.getBody());
+            mPostId = currentPost.getId();
             mCommentButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -81,22 +88,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         }
 
-        void bindTo(Posts currentPost){
-            //Populate the textviews with data
-            mPostName.setText(mName);
-            mPostTitle.setText(currentPost.getTitle());
-            mPostBody.setText(currentPost.getBody());
-            mPostId = currentPost.getId();
-
-        }
-
-        @Override
+        /**@Override
         public void onClick(View view) {
             Posts currentPost = mPosts.get(getAdapterPosition());
             Intent detailIntent = new Intent(mContext, MainActivity.class);
             detailIntent.putExtra("id", currentPost.getId());
             mContext.startActivity(detailIntent);
-        }
+        }**/
     }
 
 }

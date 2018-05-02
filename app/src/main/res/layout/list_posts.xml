@@ -33,8 +33,18 @@
             android:layout_margin="4dp"
             android:layout_toRightOf="@id/post_imageview"
             android:layout_below="@id/post_imageview"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:text="Title"/>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toRightOf="@id/post_imageview"
+            android:layout_below="@id/post_title"
+            android:background="#686868" />
 
         <TextView
             android:id="@+id/post_body"
@@ -42,8 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
             android:layout_toRightOf="@id/post_imageview"
-            android:layout_below="@id/post_title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_below="@id/divider"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:text="Body"/>
 
         <TextView
