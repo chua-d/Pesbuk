@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.danceciliochua.pesbuk.API.APIBuild;
 import com.example.danceciliochua.pesbuk.API.APIClient;
+import com.example.danceciliochua.pesbuk.Adapters.PeopleAdapter;
 import com.example.danceciliochua.pesbuk.Data.Users;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.danceciliochua.pesbuk;
+package com.example.danceciliochua.pesbuk.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.danceciliochua.pesbuk.Data.Users;
+import com.example.danceciliochua.pesbuk.MainActivity;
+import com.example.danceciliochua.pesbuk.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder> {
 
@@ -24,7 +25,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
      * @param Usersd ArrayList containing the sports data
      * @param context Context of the application
      */
-    PeopleAdapter(Context context, ArrayList<Users> Usersd) {
+    public PeopleAdapter(Context context, ArrayList<Users> Usersd) {
         mUsers = new ArrayList<>();
         this.mUsers = Usersd;
         this.mContext = context;

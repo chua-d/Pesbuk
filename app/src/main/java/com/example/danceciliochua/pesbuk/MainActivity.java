@@ -1,6 +1,5 @@
 package com.example.danceciliochua.pesbuk;
 
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
@@ -12,11 +11,12 @@ import android.widget.Toast;
 
 import com.example.danceciliochua.pesbuk.API.APIBuild;
 import com.example.danceciliochua.pesbuk.API.APIClient;
+import com.example.danceciliochua.pesbuk.Adapters.ProfileAdapter;
 import com.example.danceciliochua.pesbuk.Data.Users;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -26,13 +26,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity {
 
-    TextView mName;
-    TextView mWork;
-    TextView mEmail;
-    TextView mPhone;
-    TextView mWeb;
+
 
     private GoogleMap mMap;
 
@@ -41,23 +37,23 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        NestedScrollView scrollView = (NestedScrollView) findViewById (R.id.nest);
-//        scrollView.setFillViewport (true);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
+        String id = toString().valueOf(getIntent().getIntExtra("id",0));
+        Toast.makeText(this, id ,Toast.LENGTH_SHORT).show();
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
+        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
         tabLayout.addTab(tabLayout.newTab().setText("Posts"));
         tabLayout.addTab(tabLayout.newTab().setText("Albums"));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final ProfileAdapter adapter = new ProfileAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        final ProfileAdapter adapter = new ProfileAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),Integer.parseInt(id));
 
         viewPager.setAdapter(adapter);
 
@@ -68,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+
             }
 
             @Override
@@ -81,59 +78,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        String id = toString().valueOf(getIntent().getIntExtra("id",0));
-        Toast.makeText(this, id ,Toast.LENGTH_SHORT).show();
-        loadProfile(Integer.parseInt(id));
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        //loadProfile(Integer.parseInt(id));
+
+
 
     }
 
-    public void loadProfile(int id) {
-        mName = (TextView) findViewById(R.id.profile_name);
-        mWork = (TextView) findViewById(R.id.profile_work);
-        mEmail = (TextView) findViewById(R.id.profile_email);
-        mPhone = (TextView) findViewById(R.id.profile_phone);
-        mWeb = (TextView) findViewById(R.id.profile_web);
-
-        APIClient client = ((APIBuild) this.getApplication()).getClient();
-
-        client.profile(id).enqueue(new Callback<List<Users>>() {
-            @Override
-            public void onResponse(Call<List<Users>> call, Response<List<Users>> response) {
-                for(Users profile : response.body()) {
-                    mName.setText(profile.getName() + " (" + profile.getUsername() + ")");
-                    mWork.setText(profile.getCompany().getName());
-                    mEmail.setText(profile.getEmail());
-                    mPhone.setText(profile.getPhone());
-                    mWeb.setText(profile.getWebsite());
-                    String Address = profile.getAddress().getSuite() +
-                            ", " + profile.getAddress().getStreet() +
-                            ", " + profile.getAddress().getCity() +
-                            ", " + profile.getAddress().getZipcode();
-
-                    LatLng loc = new LatLng(Double.parseDouble(profile.getAddress().getGeo().getLat()),
-                            Double.parseDouble(profile.getAddress().getGeo().getLng()));
-                    mMap.addMarker(new MarkerOptions().position(loc).title(Address));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 17));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Users>> call, Throwable t) {
-
-            }
-        });
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(14.5576109, 121.0464676);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
-    }
 }
