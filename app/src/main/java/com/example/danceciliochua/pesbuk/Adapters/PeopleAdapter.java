@@ -108,6 +108,7 @@ public class PeopleAdapter extends RecyclerView.Adapter<PeopleAdapter.ViewHolder
             Users currentUser = mUsers.get(getAdapterPosition());
             Intent detailIntent = new Intent(mContext, MainActivity.class);
             detailIntent.putExtra("id", currentUser.getId());
+            detailIntent.putExtra("name", currentUser.getName());
             mContext.startActivity(detailIntent);
         }
     }

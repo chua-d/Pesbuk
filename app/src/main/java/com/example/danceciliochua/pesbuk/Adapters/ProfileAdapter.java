@@ -14,12 +14,13 @@ public class ProfileAdapter extends FragmentStatePagerAdapter {
     int mUserId;
     Bundle bundle;
 
-    public ProfileAdapter(FragmentManager fm, int NumOfTabs, int Userid) {
+    public ProfileAdapter(FragmentManager fm, int NumOfTabs, int Userid, String name) {
         super(fm);
         this.mNumOfTabs = NumOfTabs;
         this.mUserId = Userid;
         bundle = new Bundle();
         bundle.putInt("id", Userid);
+        bundle.putString("name", name);
 
     }
 

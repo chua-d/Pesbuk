@@ -1,5 +1,6 @@
 package com.example.danceciliochua.pesbuk.API;
 
+import com.example.danceciliochua.pesbuk.Data.Comments;
 import com.example.danceciliochua.pesbuk.Data.Posts;
 import com.example.danceciliochua.pesbuk.Data.Users;
 
@@ -23,6 +24,9 @@ public interface APIClient {
 
     @GET("/users/{user}/posts")
     Call<List<Posts>> posts(@Path("user") Integer id);
+
+    @GET("posts/{post}/comments")
+    Call<List<Comments>> comments(@Path("post") Integer id);
 
 }
 

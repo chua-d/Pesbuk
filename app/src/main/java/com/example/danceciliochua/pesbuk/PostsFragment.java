@@ -36,6 +36,7 @@ public class PostsFragment extends Fragment {
     View mView;
 
 
+
     public PostsFragment() {
         // Required empty public constructor
     }
@@ -68,7 +69,7 @@ public class PostsFragment extends Fragment {
             public void onResponse(Call<List<Posts>> call, Response<List<Posts>> response) {
                 mPosts = new ArrayList<>();
                 mPosts.addAll(response.body());
-                mPostAdapter = new PostsAdapter(getActivity().getApplicationContext(), mPosts);
+                mPostAdapter = new PostsAdapter(getActivity().getApplicationContext(), mPosts, mArgs.getString("name"));
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 mRecyclerView.setAdapter(mPostAdapter);
             }

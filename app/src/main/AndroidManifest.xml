@@ -23,13 +23,22 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCP7mJMK6PdemV6JWoO0H632qHTVVQ5nec" />
 
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".PeopleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".CommentsActivity"
+            android:label="Comments"
+            android:parentActivityName="com.example.danceciliochua.pesbuk.MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+
         </activity>
     </application>
 

@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.danceciliochua.pesbuk.CommentsActivity;
 import com.example.danceciliochua.pesbuk.Data.Posts;
 import com.example.danceciliochua.pesbuk.MainActivity;
 import com.example.danceciliochua.pesbuk.R;
@@ -20,16 +22,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     private ArrayList<Posts> mPosts;
     private Context mContext;
+    public Toast mToast;
+    private String mName;
+
 
     /**
      * Constructor that passes in the sports data and the context
      * @param Posts ArrayList containing the sports data
      * @param context Context of the application
      */
-    public PostsAdapter(Context context, ArrayList<Posts> Posts) {
+    public PostsAdapter(Context context, ArrayList<Posts> Posts, String name) {
         mPosts = new ArrayList<>();
         this.mPosts = Posts;
         this.mContext = context;
+        this.mName = name;
     }
 
     @Override
@@ -71,18 +77,25 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             mPostBody = (TextView)itemView.findViewById(R.id.post_body);
             mCommentButton = (TextView)itemView.findViewById(R.id.post_comments_button);
 
-
         }
 
         void bindTo(Posts currentPost){
             //Populate the textviews with data
+            mPostName.setText(mName);
             mPostTitle.setText(currentPost.getTitle());
             mPostBody.setText(currentPost.getBody());
             mPostId = currentPost.getId();
+
             mCommentButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, mPostId,Toast.LENGTH_SHORT);
+                    Posts clickedPost = mPosts.get(getAdapterPosition());
+                    Intent commentIntent = new Intent(mContext, CommentsActivity.class);
+                    commentIntent.putExtra("postId", clickedPost.getId());
+                    commentIntent.putExtra("postName", mName);
+                    commentIntent.putExtra("postTitle",clickedPost.getTitle());
+                    commentIntent.putExtra("postBody", clickedPost.getBody());
+                    mContext.startActivity(commentIntent);
                 }
             });
 

@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         String id = toString().valueOf(getIntent().getIntExtra("id",0));
+        String name = getIntent().getStringExtra("name");
         Toast.makeText(this, id ,Toast.LENGTH_SHORT).show();
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final ProfileAdapter adapter = new ProfileAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),Integer.parseInt(id));
+        final ProfileAdapter adapter = new ProfileAdapter(getSupportFragmentManager(),tabLayout.getTabCount(),Integer.parseInt(id),name);
 
         viewPager.setAdapter(adapter);
 
