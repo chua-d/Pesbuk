@@ -1,6 +1,8 @@
 package com.example.danceciliochua.pesbuk.API;
 
+import com.example.danceciliochua.pesbuk.Data.Albums;
 import com.example.danceciliochua.pesbuk.Data.Comments;
+import com.example.danceciliochua.pesbuk.Data.Photos;
 import com.example.danceciliochua.pesbuk.Data.Posts;
 import com.example.danceciliochua.pesbuk.Data.Users;
 
@@ -27,6 +29,18 @@ public interface APIClient {
 
     @GET("posts/{post}/comments")
     Call<List<Comments>> comments(@Path("post") Integer id);
+
+    @GET("users/{user}/albums")
+    Call<List<Albums>> listAlbums(@Path("user") Integer id);
+
+    @GET("/albums/{album}/photos?_sort=id&_order=desc&limit=1")
+    Call<List<Photos>> albumThum(@Path("album") Integer id);
+
+    @GET("/albums/{album}/photos")
+    Call<List<Photos>> listPhotos(@Path("album") Integer id);
+
+    @GET("/photos")
+    Call<List<Photos>> viewPhoto(@Query("id") Integer id);
 
 }
 

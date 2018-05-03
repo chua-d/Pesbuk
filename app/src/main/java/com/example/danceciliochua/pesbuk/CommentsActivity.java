@@ -65,7 +65,7 @@ public class CommentsActivity extends AppCompatActivity {
         APIClient client = ((APIBuild) this.getApplication()).getClient();
 
 
-        client.comments(getIntent().getIntExtra("postId",1)).enqueue(new Callback<List<Comments>>() {
+        client.comments(getIntent().getIntExtra("postId",0)).enqueue(new Callback<List<Comments>>() {
             @Override
             public void onResponse(Call<List<Comments>> call, Response<List<Comments>> response) {
                 mComments = new ArrayList<>();
