@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.danceciliochua.pesbuk.API.APIBuild;
 import com.example.danceciliochua.pesbuk.API.APIClient;
 import com.example.danceciliochua.pesbuk.Data.Albums;
 import com.example.danceciliochua.pesbuk.Data.Photos;
 import com.example.danceciliochua.pesbuk.MainActivity;
+import com.example.danceciliochua.pesbuk.PhotosActivity;
 import com.example.danceciliochua.pesbuk.R;
 
 import java.util.ArrayList;
@@ -64,6 +67,7 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.ViewHolder
         //Member Variables for the TextViews
         private ImageView mAlbumThumb;
         private TextView mAlbumTitle;
+        RequestOptions requestOptions;
 
         /**
          * Constructor for the ViewHolder, used in onCreateViewHolder().
@@ -75,6 +79,8 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.ViewHolder
             //Initialize the views
             mAlbumThumb = (ImageView) itemView.findViewById(R.id.albums_imageview);
             mAlbumTitle = (TextView) itemView.findViewById(R.id.album_title);
+            requestOptions = new RequestOptions();
+            itemView.setOnClickListener(this);
 
         }
 
@@ -82,12 +88,14 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.ViewHolder
             //Populate the textviews with data
             mAlbumTitle.setText(currentAlbum.getTitle());
             APIClient client = ((APIBuild) mContext.getApplicationContext()).getClient();
+            requestOptions.placeholder(R.drawable.ic_load);
 
             client.albumThum(currentAlbum.getId()).enqueue(new Callback<List<Photos>>() {
                 @Override
                 public void onResponse(Call<List<Photos>> call, Response<List<Photos>> response) {
                     for(Photos photos : response.body()) {
                         Glide.with(mContext).load(photos.getThumbnailUrl()).into(mAlbumThumb);
+
                     }
                 }
 
@@ -102,8 +110,9 @@ public class AlbumsAdapter extends RecyclerView.Adapter<AlbumsAdapter.ViewHolder
         @Override
         public void onClick(View view) {
             Albums currentAlbum = mAlbums.get(getAdapterPosition());
-            Intent detailIntent = new Intent(mContext, MainActivity.class);
+            Intent detailIntent = new Intent(mContext, PhotosActivity.class);
             detailIntent.putExtra("id", currentAlbum.getId());
+            detailIntent.putExtra("albumName", currentAlbum.getTitle());
             mContext.startActivity(detailIntent);
         }
     }
