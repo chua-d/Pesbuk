@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Profile"));
         tabLayout.addTab(tabLayout.newTab().setText("Posts"));
         tabLayout.addTab(tabLayout.newTab().setText("Albums"));
+        tabLayout.addTab(tabLayout.newTab().setText("Todos"));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 

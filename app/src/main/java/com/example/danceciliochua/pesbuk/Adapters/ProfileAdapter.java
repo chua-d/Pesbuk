@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.example.danceciliochua.pesbuk.AlbumsFragment;
 import com.example.danceciliochua.pesbuk.PostsFragment;
 import com.example.danceciliochua.pesbuk.ProfileFragment;
+import com.example.danceciliochua.pesbuk.TodosFragment;
 
 public class ProfileAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
@@ -29,6 +30,7 @@ public class ProfileAdapter extends FragmentStatePagerAdapter {
         ProfileFragment profileFragment = new ProfileFragment();
         PostsFragment postsFragment = new PostsFragment();
         AlbumsFragment albumsFragment = new AlbumsFragment();
+        TodosFragment todosFragment = new TodosFragment();
         switch (position) {
             case 0:
                 profileFragment.setArguments(bundle);
@@ -41,6 +43,10 @@ public class ProfileAdapter extends FragmentStatePagerAdapter {
             case 2:
                 albumsFragment.setArguments(bundle);
                 return albumsFragment;
+
+            case 3:
+                todosFragment.setArguments(bundle);
+                return todosFragment;
 
             default:
                 return null;

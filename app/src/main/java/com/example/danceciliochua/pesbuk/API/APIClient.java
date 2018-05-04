@@ -4,6 +4,7 @@ import com.example.danceciliochua.pesbuk.Data.Albums;
 import com.example.danceciliochua.pesbuk.Data.Comments;
 import com.example.danceciliochua.pesbuk.Data.Photos;
 import com.example.danceciliochua.pesbuk.Data.Posts;
+import com.example.danceciliochua.pesbuk.Data.Todos;
 import com.example.danceciliochua.pesbuk.Data.Users;
 
 import java.util.List;
@@ -41,6 +42,9 @@ public interface APIClient {
 
     @GET("/photos")
     Call<List<Photos>> viewPhoto(@Query("id") Integer id);
+
+    @GET("users/{user}/todos")
+    Call<List<Todos>> listTodos(@Path("user") Integer id);
 
 }
 
