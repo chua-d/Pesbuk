@@ -80,11 +80,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        //loadProfile(Integer.parseInt(id));
-
-
-
     }
 
 }
