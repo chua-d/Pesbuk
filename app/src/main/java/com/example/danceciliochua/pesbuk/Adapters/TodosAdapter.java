@@ -1,4 +1,4 @@
-package com.example.danceciliochua.pesbuk;
+package com.example.danceciliochua.pesbuk.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.danceciliochua.pesbuk.Data.Comments;
 import com.example.danceciliochua.pesbuk.Data.Todos;
+import com.example.danceciliochua.pesbuk.R;
 
 import java.util.ArrayList;
 

@@ -12,10 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.danceciliochua.pesbuk.API.APIBuild;
 import com.example.danceciliochua.pesbuk.API.APIClient;
-import com.example.danceciliochua.pesbuk.Adapters.AlbumsAdapter;
-import com.example.danceciliochua.pesbuk.Adapters.CommentsAdapter;
-import com.example.danceciliochua.pesbuk.Data.Albums;
-import com.example.danceciliochua.pesbuk.Data.Comments;
+import com.example.danceciliochua.pesbuk.Adapters.TodosAdapter;
 import com.example.danceciliochua.pesbuk.Data.Todos;
 
 import java.util.ArrayList;
